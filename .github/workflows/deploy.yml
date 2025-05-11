@@ -20,8 +20,8 @@ jobs:
           # SFTP credentials
           host: ${{ secrets.SFTP_HOST }}
           port: ${{ secrets.SFTP_PORT }}
-          user: ${{ secrets.SFTP_USER }}
-          pass: ${{ secrets.SFTP_PASS }}
+          user: ${{ secrets.SFTP_USERNAME }}
+          pass: ${{ secrets.SFTP_PASSWORD }}
           # lftp settings
           onlyNewer: true
           settings: 'sftp:auto-confirm=yes'
