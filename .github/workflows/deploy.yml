@@ -1,0 +1,29 @@
+name: Deploy via SFTP with Password
+
+on:
+  push:
+    branches:
+      - main  # Change if your deploy branch is different
+
+jobs:
+  sftp-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Optional build step
+    # - name: Build
+    #   run: npm run build
+
+    - name: Deploy with lftp (SFTP with password)
+      uses: pressidium/lftp-mirror-action@v1
+      with:
+        host: ${{ secrets.SFTP_HOST }}
+        port: 22
+        user: ${{ secrets.SFTP_USERNAME }}
+        pass: ${{ secrets.SFTP_PASSWORD }}
+        localDir: './'  # Change if using ./dist or ./build
+        remoteDir: '/afs/zcu.cz/project/www/www-aitfdu/'  # Your target directory
+        options: '--reverse --delete --verbose --exclude-glob .git*'
