@@ -1,29 +1,33 @@
-name: Deploy via SFTP with Password
-
+name: Deploy via SFTP
 on:
   push:
     branches:
-      - main  # Change if your deploy branch is different
-
+      - main
 jobs:
-  sftp-deploy:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-
+    if: github.event_name == 'push'
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    # Optional build step
-    # - name: Build
-    #   run: npm run build
-
-    - name: Deploy with lftp (SFTP with password)
-      uses: pressidium/lftp-mirror-action@v1
-      with:
-        host: ${{ secrets.SFTP_HOST }}
-        port: 22
-        user: ${{ secrets.SFTP_USERNAME }}
-        pass: ${{ secrets.SFTP_PASSWORD }}
-        localDir: './'  # Change if using ./dist or ./build
-        remoteDir: '/afs/zcu.cz/project/www/www-aitfdu/'  # Your target directory
-        options: '--reverse --delete --verbose --exclude-glob .git*'
+      - name: Deploy files via SFTP
+        uses: pressidium/lftp-mirror-action@v1
+        with:
+          # SFTP credentials
+          host: ${{ secrets.SFTP_HOST }}
+          port: ${{ secrets.SFTP_PORT }}
+          user: ${{ secrets.SFTP_USER }}
+          pass: ${{ secrets.SFTP_PASS }}
+          # lftp settings
+          onlyNewer: true
+          settings: 'sftp:auto-confirm=yes'
+          # Mirror command options
+          localDir: '.'
+          remoteDir: '/afs/zcu.cz/project/www/www-aitfdu/'
+          reverse: true
+          ignoreFile: '.lftp_ignore'
+          options: '--verbose'
