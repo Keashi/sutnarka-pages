@@ -10,6 +10,14 @@
   --font-size-medium: 24pt;
   --font-size-large: 36pt;
   --font-size-title: 50pt;
+
+  --font-fallback: "DM Sans", sans-serif;
+  --font-medium: "nudicamedium", var(--font-fallback);
+  --font-regular: "nudicaregular", var(--font-fallback);
+  --font-thin: "nudicathin", var(--font-fallback);
+  --font-bold: "nudicabold", var(--font-fallback);
+  --font-ultralight: "nudicaultralight", var(--font-fallback);
+  --font-light: "nudicalight", var(--font-fallback);
 }
 
 * {
@@ -18,7 +26,7 @@
   color: var(--font-color);
   box-sizing: border-box;
 
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-ultralight);
   font-optical-sizing: auto;
   font-style: normal;
   text-align: center;
@@ -52,8 +60,8 @@ body {
 }
 
 .title > * {
+  font-family: var(--font-light);
   font-size: var(--font-size-title);
-  font-weight: 500;
 }
 
 .title__text {
@@ -63,7 +71,7 @@ body {
 .title__text::after {
   content: '.';
   color: var(--secondary-color);
-  font-weight: 800;
+  font-family: var(--font-regular);
 }
 
 .content {
