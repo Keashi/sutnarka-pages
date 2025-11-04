@@ -1,9 +1,9 @@
 :root {
-  --background-color: #1c1c1c;
+  --background-color: #191a39ff;
   --font-color: #ffffff;
 
   --main-color: #f72585ff;
-  --secondary-color: #7209b7ff;
+  --secondary-color: #54389cff;
   --ternary-color: #ef1a24ff;
 
   --font-size: 20pt;
@@ -54,28 +54,33 @@ body {
 }
 
 .title {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title > * {
   font-family: var(--font-light);
   font-size: var(--font-size-title);
+  color: var(--main-color);
+  line-height: 93%;
+}
+
+.title__svg {
+  width: 3.8em;
+  height: auto;
+  margin-bottom: -18px;
+  z-index: 2;
 }
 
 .title__text {
-  color: var(--main-color);
-}
-
-.title__text::after {
-  content: '.';
-  color: var(--secondary-color);
-  font-family: var(--font-regular);
+  position: relative;
+  z-index: 1;
 }
 
 .content {
-  padding: 2em 0;
+  padding: 4em 0;
 }
 
 .content > * {
