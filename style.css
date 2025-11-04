@@ -79,6 +79,8 @@ body {
   height: auto;
   margin-bottom: -18px;
   z-index: 2;
+
+  pointer-events: none;
 }
 
 .title__text {
